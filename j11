@@ -1,0 +1,110 @@
+ex01
+
+int main()
+{
+	t_list* item = ft_create_elem("asdf");
+	printf("%s\n", (char*)item->data);
+	printf("%p\n", item->next);
+}
+
+ex01 / 02
+
+void test_list(t_list* list)
+{
+	for (; list != 0; list = list->next)
+		printf("%s,", (char*)list->data);
+	printf("\n");
+}
+
+int main()
+{
+	t_list* list = 0;
+	ft_list_push_back(&list, "asdf");
+	test_list(list);
+	ft_list_push_back(&list, "qwer");
+	ft_list_push_back(&list, "zxcv");
+	test_list(list);
+	list = 0;
+	ft_list_push_back(&list, "uiop");
+	ft_list_push_back(&list, "hjkl");
+	test_list(list);
+}
+
+expected = "asdf,\n asdf,qwer,zxcv,\n uiop,hjkl, \n";
+
+ex03
+
+#define CE(data) ft_create_elem(data)
+
+void test_list(t_list* list)
+{
+	for (; list != 0; list = list->next)
+		printf("%s,", (char*)list->data);
+	printf("\n");
+}
+
+int main()
+{
+	t_list* list = 0;
+	printf("%d\n", ft_list_size(list));
+	list = CE("asdf");
+	printf("%d\n", ft_list_size(list));
+	list->next = CE("qwer");
+	list->next->next = CE("zxcv");
+	printf("%d\n", ft_list_size(list));
+	list = CE("asdf");
+	list->next = CE("asdf");
+	list->next->next = CE("asdf");
+	list->next->next->next = CE("asdf");
+	printf("%d\n", ft_list_size(list));
+	list->next->next->next->next = CE("asdf");
+	printf("%d\n", ft_list_size(list));
+}
+
+ex04
+
+#define CE(data) ft_create_elem(data)
+#define CL(list) test_list(list)
+
+void test_list(t_list* list)
+{
+	for (; list != 0; list = list->next)
+		printf("%s,", (char*)list->data);
+	printf("\n");
+}
+
+int main()
+{
+	t_list* list = 0;
+	printf("%p\n", ft_list_last(list));
+	list = CE("asdf");
+	printf("%s\n", (char*)(ft_list_last(list)->data));
+	list->next = CE("qwer");
+	list->next->next = CE("zxcv");
+	printf("%s\n", (char*)(ft_list_last(list)->data));
+	list = CE("asdf");
+	list->next = CE("qwer");
+	list->next->next = CE("zxcv");
+	list->next->next->next = CE("uiop");
+	printf("%s\n", (char*)(ft_list_last(list)->data));
+	list->next->next->next->next = CE("hjkl");
+	printf("%s\n", (char*)(ft_list_last(list)->data));
+}
+
+ex05
+
+#define CE(data) ft_create_elem(data)
+#define CL(list) test_list(list)
+
+void test_list(t_list* list)
+{
+	for (; list != 0; list = list->next)
+		printf("%s,", (char*)list->data);
+	printf("\n");
+}
+
+int main(int argc, char** argv)
+{
+	t_list* list = ft_list_push_params(argc, argv);
+	CL(list);
+}
